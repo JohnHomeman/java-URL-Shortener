@@ -1,0 +1,21 @@
+{
+  "source_repo": "backend/be6-ai-context",
+  "default_relative_path": "../../be6-ai-context",
+  "rules_mapping": {
+    "planning": [
+      "ctx_rules.md",
+      "spec_template.md",
+      "plan_template.md"
+    ],
+    "coding": [
+      "coding_guidelines.md"
+    ],
+    "review": [
+      "ctx_rules.md",
+      "coding_guidelines.md"
+    ]
+  },
+  "instruction": "Please load specific rules based on rules_mapping for the current task phase.",
+  "version": "v1.0.0",
+  "sync_date": "2026-09-05"
+}
