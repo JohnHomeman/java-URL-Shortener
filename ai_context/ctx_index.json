@@ -1,5 +1,13 @@
 {
-  "last_updated": "2026-09-05 22:25:00",
+  "last_updated": "2026-09-06 08:58:30",
   "global_version": "v0.1.0",
-  "modules": {}
+  "modules": {
+    "framework": {
+      "state_file": "current_state/framework_logic.md",
+      "history_tickets": [
+        "STEP2-Spring_Boot_init"
+      ],
+      "version": "v0.1.0"
+    }
+  }
 }
