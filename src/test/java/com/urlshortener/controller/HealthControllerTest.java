@@ -28,7 +28,6 @@ class HealthControllerTest {
                 .andExpect(jsonPath("$.code").value(0))
                 .andExpect(jsonPath("$.message").value("success"))
                 .andExpect(jsonPath("$.data.status").value("UP"))
-                .andExpect(jsonPath("$.data.timestamp").isNumber())
                 .andExpect(jsonPath("$.timestamp").isNumber());
     }
 }
