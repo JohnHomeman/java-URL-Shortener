@@ -1,29 +1,26 @@
 server:
   port: 8080
-  shutdown: graceful
 
 spring:
   application:
-    name: url-shortener
-  threads:
-    virtual:
-      enabled: true
+    name: url-shortener-test
   web:
     resources:
       add-mappings: false
   mvc:
     throw-exception-if-no-handler-found: true
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/java_project?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&tinyInt1isBit=false}
-    username: ${SPRING_DATASOURCE_USERNAME:root}
-    password: ${SPRING_DATASOURCE_PASSWORD:123456}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:h2:mem:url_shortener;MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
   jpa:
     open-in-view: false
     hibernate:
       ddl-auto: validate
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
         format_sql: true
     show-sql: false
   flyway:
@@ -33,7 +30,7 @@ spring:
 
 app:
   short-url:
-    domain: ${APP_SHORT_URL_DOMAIN:http://localhost:8080}
+    domain: http://localhost:8080
 
 logging:
   level:
