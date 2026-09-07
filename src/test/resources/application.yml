@@ -27,6 +27,14 @@ spring:
     enabled: true
     locations: classpath:db/migration
     baseline-on-migrate: true
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+      username: ${SPRING_DATA_REDIS_USERNAME:default}
+      password: ${SPRING_DATA_REDIS_PASSWORD:redis123456}
+      database: 0
+
 
 app:
   short-url:

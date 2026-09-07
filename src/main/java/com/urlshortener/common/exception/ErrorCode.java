@@ -15,6 +15,9 @@ public enum ErrorCode {
     RESERVED_KEYWORD(HttpStatus.BAD_REQUEST, 40004, "Custom alias contains reserved keyword: %s"),
     INVALID_CUSTOM_ALIAS_FORMAT(HttpStatus.BAD_REQUEST, 40005, "Invalid custom alias format"),
     CUSTOM_ALIAS_ALREADY_EXISTS(HttpStatus.CONFLICT, 40901, "Custom alias already exists: %s"),
+    SHORT_URL_NOT_FOUND(HttpStatus.NOT_FOUND, 40401, "Short URL not found: %s"),
+    SHORT_URL_EXPIRED(HttpStatus.GONE, 41001, "Short URL has expired"),
+    SHORT_URL_DISABLED(HttpStatus.FORBIDDEN, 40301, "Short URL is disabled"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, 50000, "Internal server error");
 
     private final HttpStatus httpStatus;

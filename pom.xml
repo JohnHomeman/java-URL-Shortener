@@ -82,6 +82,18 @@
             <version>33.3.1-jre</version>
         </dependency>
 
+        <!-- Spring Data Redis Starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- Commons Pool2 for Lettuce Connection Pool -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+
         <!-- Test Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
