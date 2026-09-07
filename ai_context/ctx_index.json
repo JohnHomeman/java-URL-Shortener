@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-06 08:58:30",
-  "global_version": "v0.1.0",
+  "last_updated": "2026-09-07 11:00:00",
+  "global_version": "v0.2.0",
   "modules": {
     "framework": {
       "state_file": "current_state/framework_logic.md",
@@ -8,6 +8,13 @@
         "STEP2-Spring_Boot_init"
       ],
       "version": "v0.1.0"
+    },
+    "shorten_core": {
+      "state_file": "current_state/shorten_core_logic.md",
+      "history_tickets": [
+        "STEP3-URL_Shorten_Core"
+      ],
+      "version": "v0.2.0"
     }
   }
 }
