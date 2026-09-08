@@ -1,0 +1,11 @@
+.git
+.gitignore
+.idea
+.vscode
+*.iml
+.DS_Store
+Thumbs.db
+target/
+ai_context/
+*.md
+.mvn/timing.properties
