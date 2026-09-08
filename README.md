@@ -25,6 +25,10 @@
   - [設定檔配置](#設定檔配置)
   - [啟動與測試指令](#啟動與測試指令)
   - [cURL 測試範例](#curl-測試範例)
+- [🐳 Docker 與 Docker Compose 容器化](#-docker-與-docker-compose-容器化)
+  - [使用 Docker Compose 一鍵啟動完整環境](#使用-docker-compose-一鍵啟動完整環境)
+  - [手動建置與運行 Docker 映像檔](#手動建置與運行-docker-映像檔)
+- [🔄 CI/CD 自動化流程 (GitHub Actions)](#-cicd-自動化流程-github-actions)
 
 ---
 
@@ -236,3 +240,77 @@ curl -i -X GET http://localhost:8080/mdn-test
 ```bash
 curl -i -X GET http://localhost:8080/non-existent-link
 ```
+
+---
+
+## 🐳 Docker 與 Docker Compose 容器化
+
+專案已內建最佳化的 **Multi-stage Dockerfile**（使用 `Java 21 Alpine` 輕量映像檔）與一鍵式 `docker-compose.yml`。
+
+### 使用 Docker Compose 一鍵啟動完整環境
+
+只需一條指令即可啟動包含 **MySQL 8.0**、**Redis 7** 與 **URL Shortener 應用** 的完整叢集：
+
+```bash
+# 啟動所有服務（背景執行並自動建置映像檔）
+docker compose up -d --build
+
+# 查看所有容器運行狀態
+docker compose ps
+
+# 查看應用程式即時日誌
+docker compose logs -f app
+
+# 停止並移除所有容器
+docker compose down
+```
+
+### 手動建置與運行 Docker 映像檔
+
+```bash
+# 1. 建置 Docker 映像檔
+docker build -t url-shortener:latest .
+
+# 2. 運行應用容器（需確保本機已有 MySQL 與 Redis 運行）
+docker run -d \
+  -p 8080:8080 \
+  -e SPRING_DATASOURCE_URL="jdbc:mysql://host.docker.internal:3306/java_project?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8&allowPublicKeyRetrieval=true" \
+  -e SPRING_DATA_REDIS_HOST="host.docker.internal" \
+  --name url-shortener-app \
+  url-shortener:latest
+```
+
+---
+
+## 🔄 CI/CD 自動化流程 (GitHub Actions)
+
+專案配置於 [`.github/workflows/ci-cd.yml`](.github/workflows/ci-cd.yml)，實現現代化 GitOps 自動化整合與發布流程：
+
+```
+[Git Push / PR to develop or main]
+               │
+               ▼
+   ┌───────────────────────┐
+   │ Job 1: Test & Build   │ ──► Setup Java 21 & Maven Cache
+   │                       │ ──► 執行全自動單元/整合測試 (mvn clean verify)
+   │                       │ ──► 打包 JAR 並上傳為 GitHub Artifact
+   └───────────┬───────────┘
+               │ (僅在 develop / main 分支 Push 且測試通過時)
+               ▼
+   ┌───────────────────────┐
+   │ Job 2: Docker Build   │ ──► 登入 GitHub Container Registry (ghcr.io)
+   │        & Push         │ ──► 使用 Docker Buildx 多層快取構建
+   │                       │ ──► 自動標註 Tag (分支名、Git SHA、latest)
+   │                       │ ──► 推送映像檔至 ghcr.io/<owner>/url-shortener
+   └───────────────────────┘
+```
+
+### 觸發與行為說明：
+1. **Pull Request (對象為 `develop` 或 `main`)**：
+   - 觸發 `Job 1: Test & Build`，進行程式碼驗證與測試，確保 PR 無破壞性改動。
+2. **Push 到 `develop` 分支**：
+   - 執行 `Job 1` 測試與 JAR 包版。
+   - 執行 `Job 2` 自動構建 Docker 映像檔並發布標籤 `ghcr.io/<owner>/url-shortener:develop` 與 `ghcr.io/<owner>/url-shortener:sha-<commit_id>`。
+3. **Push 到 `main` 分支**：
+   - 自動產出 `latest` 與對應 SHA 標籤之生產發布映像檔。
+
