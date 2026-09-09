@@ -247,6 +247,5 @@
 
 ## 9. Backlog / Future Scope（下期規劃）
 - **[STEP5-Access_Metrics]**：實作轉址存取事件日誌、非同步點擊次數累加（Redis INCRBY / Kafka 事件訊息）與統計指標 API（下期）。
-- **[STEP6-Scheduled_Cleanup]**：實作 Spring `@Scheduled` / Quartz Cron Job 每日定時清理過期短網址紀錄，同步主動清理 Redis 快取空間。
-- **[STEP7-Stress_Testing_Benchmark]**：實作高併發壓力測試（使用 k6 / JMeter）、JVM 與連線池極限調優，並產出 QPS / P99 延遲效能分析報告。
+- **[STEP6-Stress_Testing_Benchmark]**：實作高併發壓力測試（使用 k6 / JMeter）、JVM 與連線池極限調優，並產出 QPS / P99 延遲效能分析報告。
 

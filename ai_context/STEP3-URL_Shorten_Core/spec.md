@@ -214,4 +214,3 @@ CREATE TABLE `short_urls` (
 ## 9. Backlog / Future Scope（下期規劃）
 - **[STEP4-URL_Redirect_Cache]**：實作短碼轉址重定向（HTTP 302/301 Redirect）、Redis 快取層與快取穿透防禦（下期）。
 - **[STEP5-Access_Metrics]**：實作轉址存取事件日誌、非同步點擊次數累加與統計指標 API（下期）。
-- **[STEP6-Scheduled_Cleanup]**：實作 Spring `@Scheduled` / Quartz Cron Job 每日定時清理/歸檔過期短網址紀錄，釋放佔用之 `short_key` 與避免長網址重複過期導致之多重碰撞問題。

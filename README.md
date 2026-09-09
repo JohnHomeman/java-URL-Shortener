@@ -54,8 +54,7 @@
 - [x] **STEP3-URL_Shorten_Core**：短網址核心生成演算法（MurmurHash3 32-bit + Base62 6位短碼）、3次加鹽碰撞重試、雪花演算法安全降級、長網址冪等查重、自訂別名驗證、TTL 有效期管理與 MySQL 持久化。
 - [x] **STEP4-URL_Redirect_Cache**：HTTP 302 Found 重定向轉址、Redis 快取層整合、Cache-Aside 雙層查詢、空值快取防穿透、TTL 隨機抖動防雪崩、動態過期對齊防擊穿與 Redis 異常自動降級。
 - [ ] **STEP5-Access_Metrics** *(下期規劃)*：轉址存取事件日誌、非同步點擊次數累加（Redis INCR / 非同步批次回寫）與統計指標查詢 API。
-- [ ] **STEP6-Scheduled_Cleanup** *(下期規劃)*：Spring `@Scheduled` 定時過期清理任務，定時清理過期短網址紀錄並釋放 Key 空間。
-- [ ] **STEP7-Stress_Testing_Benchmark** *(下期規劃)*：基於 k6 / JMeter 進行高併發極限壓測（讀/寫/穿透情境），連線池與 JVM 調優並產出效能分析報告。
+- [ ] **STEP6-Stress_Testing_Benchmark** *(下期規劃)*：基於 k6 / JMeter 進行高併發極限壓測（讀/寫/穿透情境），連線池與 JVM 調優並產出效能分析報告。
 
 ---
 
