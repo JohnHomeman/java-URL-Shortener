@@ -27,6 +27,7 @@ def test_metrics_query():
             print(f"❌ 轉址請求失敗 (第 {i+1} 次): HTTP {r.status_code}")
             sys.exit(1)
     print("  -> 5 次轉址請求完成 (HTTP 302)")
+    time.sleep(0.5)
 
     print("[3] 查詢即時統計指標 (GET /api/v1/urls/mdn-302/metrics) ...")
     metrics_resp = requests.get(f"{BASE_URL}/api/v1/urls/mdn-302/metrics")

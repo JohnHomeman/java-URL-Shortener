@@ -95,10 +95,6 @@
   3. 連線 MySQL 查詢 `short_urls` 與 `access_logs` 表，檢查資料筆數與清空狀態，期望值引用 Spec §7.2 情境 C。
 
 #### 情境 D 驗收：存取日誌分頁與時間篩選查詢
-- 執行分頁查詢驗收腳本：
-  ```bash
-  python3 ai_context/STEP5-Access_Metrics/workspace/test_04_access_logs_pagination.py
-  ```
-- 或透過手動 cURL 驗證：
-  1. 執行 `curl -i -X GET "http://localhost:8080/api/v1/urls/mdn-302/logs?page=1&size=5&start_time=2026-09-01T00:00:00&end_time=2026-09-09T23:59:59"`。
-  2. 檢查回傳之 `items`, `total_elements`, `total_pages`，期望值引用 Spec §7.2 情境 D。
+- 透過手動 cURL 驗證：
+  1. 執行 `curl -i -X GET "http://localhost:8080/api/v1/urls/mdn-302/logs?page=1&size=5&start_time={startTime}&end_time={endTime}"`（請依實際寫入之時間區間帶入 ISO-8601 時間字串，例如 `2026-09-14T00:00:00`）。
+  2. 檢查回傳之 `items`、`total_elements`、`total_pages` 是否符合預期分頁與過濾結果，並可驗證異常參數防護（如時間倒置回傳 40003、`page=0` 回傳 40004）。

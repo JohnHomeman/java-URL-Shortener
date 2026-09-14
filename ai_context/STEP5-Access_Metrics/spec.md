@@ -232,8 +232,8 @@ CREATE TABLE `access_logs` (
   - 前置條件：Redis 中累積有 100 筆點擊增量與 100 筆存取日誌。
   - 期望：排程器執行完畢後，MySQL `short_urls` 表之 `click_count` 增加 100，`access_logs` 表新增 100 筆紀錄，Redis 暫存鍵與佇列清空。
 - **情境 D：存取日誌分頁與時間篩選查詢**：
-  - 前置條件：MySQL `access_logs` 存在 15 筆記錄，其中 10 筆在指定時間區間內。
-  - 期望：發送 `GET /api/v1/urls/{shortKey}/logs?page=1&size=5&start_time=...&end_time=...`，回傳項目數量為 5 筆，`total_elements` 為 10，`total_pages` 為 2。
+  - 前置條件：MySQL `access_logs` 已存在歷史存取紀錄。
+  - 期望：測試者可依實際存取時間彈性指定區間發送 `GET /api/v1/urls/{shortKey}/logs?page={page}&size={size}&start_time={startTime}&end_time={endTime}`，驗證回傳之 `items` 明細列表數量符合 `size` 設定、`total_elements` 與 `total_pages` 計算正確，並能正確過濾時間區間與攔截不合法參數（如 `start_time > end_time` 回傳 40003、無效分頁回傳 40004）。
 
 ## 8. 預期效益 (Expected Benefits)
 - **轉址零 I/O 阻塞**：透過本機記憶體佇列非同步緩衝，主線程記錄開銷 $< 0.1\text{ms}$，徹底消除轉址時的磁碟與網路阻塞。
