@@ -39,4 +39,11 @@ public interface ShortUrlRepository extends JpaRepository<ShortUrl, Long> {
             @Param("originalUrl") String originalUrl,
             @Param("now") Instant now
     );
+
+    /**
+     * 累加短網址點擊次數 (引用 Spec §3.2)
+     */
+    @org.springframework.data.jpa.repository.Modifying
+    @Query("UPDATE ShortUrl s SET s.clickCount = s.clickCount + :delta WHERE s.shortKey = :shortKey")
+    int incrementClickCount(@Param("shortKey") String shortKey, @Param("delta") Long delta);
 }
