@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-07 15:55:00",
-  "global_version": "v0.3.0",
+  "last_updated": "2026-09-09 16:50:00",
+  "global_version": "v0.4.0",
   "modules": {
     "framework": {
       "state_file": "current_state/framework_logic.md",
@@ -22,6 +22,13 @@
         "STEP4-URL_Redirect_Cache"
       ],
       "version": "v0.3.0"
+    },
+    "access_metrics": {
+      "state_file": "current_state/access_metrics_logic.md",
+      "history_tickets": [
+        "STEP5-Access_Metrics"
+      ],
+      "version": "v0.4.0"
     }
   }
 }

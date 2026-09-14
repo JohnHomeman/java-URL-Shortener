@@ -18,6 +18,8 @@ public enum ErrorCode {
     SHORT_URL_NOT_FOUND(HttpStatus.NOT_FOUND, 40401, "Short URL not found: %s"),
     SHORT_URL_EXPIRED(HttpStatus.GONE, 41001, "Short URL has expired"),
     SHORT_URL_DISABLED(HttpStatus.FORBIDDEN, 40301, "Short URL is disabled"),
+    INVALID_TIME_RANGE(HttpStatus.BAD_REQUEST, 40003, "Invalid time range: start_time must be before end_time"),
+    INVALID_PAGINATION_PARAMS(HttpStatus.BAD_REQUEST, 40004, "Invalid pagination parameters"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, 50000, "Internal server error");
 
     private final HttpStatus httpStatus;

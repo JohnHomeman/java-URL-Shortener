@@ -53,6 +53,9 @@ public class ShortUrl {
     @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.TINYINT)
     private Integer status;
 
+    @Column(name = "click_count", nullable = false)
+    private Long clickCount;
+
     @Column(name = "expired_at")
     private Instant expiredAt;
 
@@ -76,6 +79,9 @@ public class ShortUrl {
         }
         if (this.isCustom == null) {
             this.isCustom = false;
+        }
+        if (this.clickCount == null) {
+            this.clickCount = 0L;
         }
     }
 

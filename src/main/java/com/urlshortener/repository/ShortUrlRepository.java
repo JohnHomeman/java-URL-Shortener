@@ -2,9 +2,11 @@ package com.urlshortener.repository;
 
 import com.urlshortener.entity.ShortUrl;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -39,4 +41,12 @@ public interface ShortUrlRepository extends JpaRepository<ShortUrl, Long> {
             @Param("originalUrl") String originalUrl,
             @Param("now") Instant now
     );
+
+    /**
+     * 累加短網址點擊次數 (引用 Spec §3.2)
+     */
+    @Transactional
+    @Modifying
+    @Query("UPDATE ShortUrl s SET s.clickCount = s.clickCount + :delta WHERE s.shortKey = :shortKey")
+    int incrementClickCount(@Param("shortKey") String shortKey, @Param("delta") Long delta);
 }
