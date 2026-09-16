@@ -247,5 +247,5 @@
 
 ## 9. Backlog / Future Scope（下期規劃）
 - **[STEP5-Access_Metrics]**：實作轉址存取事件日誌、非同步點擊次數累加（Redis INCRBY / Kafka 事件訊息）與統計指標 API（下期）。
-- **[STEP6-Stress_Testing_Benchmark]**：實作高併發壓力測試（使用 k6 / JMeter）、JVM 與連線池極限調優，並產出 QPS / P99 延遲效能分析報告。
+- **[STEP6-k6_short_url_press]**：使用 k6 針對短網址轉址端點進行高併發壓力測試，驗證 302 回應正確性、Location Header 準確度，並量化 P95/P99 延遲與錯誤率。
 
