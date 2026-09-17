@@ -312,4 +312,6 @@ docker run -d \
    - 執行 `Job 2` 自動構建 Docker 映像檔並發布標籤 `ghcr.io/<owner>/url-shortener:develop` 與 `ghcr.io/<owner>/url-shortener:sha-<commit_id>`。
 3. **Push 到 `main` 分支**：
    - 自動產出 `latest` 與對應 SHA 標籤之生產發布映像檔。
+4. **Push Git Release Tag (如 `git tag v1.0.0`)**：
+   - 自動產出語意化版本映像檔：`ghcr.io/<owner>/url-shortener:v1.0.0` 與 `ghcr.io/<owner>/url-shortener:1.0`。
 
