@@ -27,7 +27,8 @@ spring:
         format_sql: true
     show-sql: false
   flyway:
-    enabled: false
+    enabled: ${SPRING_FLYWAY_ENABLED:true}
+    baseline-on-migrate: true
   data:
     redis:
       host: ${SPRING_DATA_REDIS_HOST:localhost}
